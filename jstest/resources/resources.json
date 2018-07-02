@@ -167,7 +167,7 @@
         "linker-map": "%{iotjs}/build/%{target}/%{build-type}/iotjs.map",
         "libdir": "%{iotjs}/build/%{target}/%{build-type}/lib",
         "image": "%{iotjs}/build/%{target}/%{build-type}/bin/iotjs",
-        "coverage-client": "%{iotjs}/deps/jerry/jerry-debugger/jerry-client-ws.py",
+        "coverage-client": "%{iotjs}/deps/jerry/jerry-debugger/jerry_client.py",
         "js-sources" : "%{iotjs}/src/js/"
       },
       "patches": [
@@ -196,7 +196,13 @@
         },
         {
           "condition": "'%{device}' in ['artik053', 'artik530', 'rpi2'] and %{coverage}",
-          "file": "%{patches}/coverage-client.diff",
+          "file": "%{patches}/jerry_client.diff",
+          "submodule": "%{iotjs}/deps/jerry/",
+          "revert": false
+        },
+        {
+          "condition": "'%{device}' in ['artik053', 'artik530', 'rpi2'] and %{coverage}",
+          "file": "%{patches}/jerry_client_ws.diff",
           "submodule": "%{iotjs}/deps/jerry/",
           "revert": false
         },
